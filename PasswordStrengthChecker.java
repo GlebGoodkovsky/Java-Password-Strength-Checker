@@ -3,23 +3,18 @@ import java.util.Scanner;
 public class PasswordStrengthChecker {
 
     public static void main(String[] args) {
-        // Create a Scanner to read user input
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter a password to check: ");
         String password = scanner.nextLine();
-
-        // Call the method to check strength
         checkPasswordStrength(password);
     }
 
-    // Method to check password strength
     public static void checkPasswordStrength(String pwd) {
         boolean hasUpper = false;
         boolean hasLower = false;
         boolean hasDigit = false;
         boolean hasSymbol = false;
 
-        // Loop through each character in the password
         for (int i = 0; i < pwd.length(); i++) {
             char ch = pwd.charAt(i);
 
@@ -30,18 +25,16 @@ public class PasswordStrengthChecker {
             } else if (Character.isDigit(ch)) {
                 hasDigit = true;
             } else {
-                hasSymbol = true; // not letter or digit
+                hasSymbol = true;
             }
         }
 
-        // Debug output (optional - remove if not needed)
-        System.out.println("hasUpper: " + hasUpper);
-        System.out.println("hasLower: " + hasLower);
-        System.out.println("hasDigit: " + hasDigit);
-        System.out.println("hasSymbol: " + hasSymbol);
-        System.out.println("length: " + pwd.length());
+        System.out.println("hasUpper: " + hasUpper + " " + checkmark(hasUpper));
+        System.out.println("hasLower: " + hasLower + " " + checkmark(hasLower));
+        System.out.println("hasDigit: " + hasDigit + " " + checkmark(hasDigit));
+        System.out.println("hasSymbol: " + hasSymbol + " " + checkmark(hasSymbol));
+        System.out.println("length: " + pwd.length() + (pwd.length() >= 8 ? " ✅" : " ❌"));
 
-        // Check if all conditions are met
         if (pwd.length() >= 8 && hasUpper && hasLower && hasDigit && hasSymbol) {
             System.out.println("Password is STRONG.");
         } else {
@@ -51,5 +44,9 @@ public class PasswordStrengthChecker {
             System.out.println("- Include uppercase and lowercase letters");
             System.out.println("- Include digits and symbols (!, @, #, etc.)");
         }
+    }
+
+    public static String checkmark(boolean condition) {
+        return condition ? "✅" : "❌";
     }
 }
